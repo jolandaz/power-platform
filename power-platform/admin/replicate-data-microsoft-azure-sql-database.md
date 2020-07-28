@@ -456,15 +456,15 @@ $tenantId = 'tenantId'
 connect-azaccount -Tenant $tenantId -Subscription $subscriptionId
 
 # Create new resource group if not exists.
-$rgAvail = Get-AzureRmResourceGroup -Name $resourceGroupName -Location $location -ErrorAction SilentlyContinue
+$rgAvail = Get-AzResourceGroup -Name $resourceGroupName -Location $location -ErrorAction SilentlyContinue
 if(!$rgAvail){
-    New-AzureRmResourceGroup -Name $resourceGroupName -Location $location
+    New-AzResourceGroup -Name $resourceGroupName -Location $location
 }
 
 # Create new key vault if not exists.
-$kvAvail = Get-AzureRmKeyVault -VaultName $keyvaultName -ResourceGroupName $resourceGroupName -ErrorAction SilentlyContinue
+$kvAvail = Get-AzKeyVault -VaultName $keyvaultName -ResourceGroupName $resourceGroupName -ErrorAction SilentlyContinue
 if(!$kvAvail){
-    New-AzureRmKeyVault -VaultName $keyvaultName -ResourceGroupName $resourceGroupName -Location $location
+    New-AzKeyVault -VaultName $keyvaultName -ResourceGroupName $resourceGroupName -Location $location
     # Wait few seconds for DNS entry to propagate
     Start-Sleep -Seconds 15
 }
